@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simples</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        input, select { margin: 5px; }
+    </style>
+</head>
+<body>
+<h1>Calculadora Simples</h1>
+<input type="number" id="a" placeholder="Número A" required>
+<input type="number" id="b" placeholder="Número B" required>
+<select id="operation">
+    <option value="add">Adicionar</option>
+    <option value="subtract">Subtrair</option>
+    <option value="multiply">Multiplicar</option>
+    <option value="divide">Dividir</option>
+</select>
+<button onclick="calculate()">Calcular</button>
+
+<h2 id="result"></h2>
+
+<script>
+    async function calculate() {
+        const a = document.getElementById('a').value;
+        const b = document.getElementById('b').value;
+        const operation = document.getElementById('operation').value;
+
+        const response = await fetch(`/${operation}?a=${a}&b=${b}`);
+        const data = await response.json();
+
+        document.getElementById('result').innerText = `Resultado: ${data.result}`;
+    }
+</script>
+</body>
+</html>
